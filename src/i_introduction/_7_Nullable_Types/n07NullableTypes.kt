@@ -20,12 +20,15 @@ fun todoTask7(client: Client?, message: String?, mailer: Mailer): Nothing = TODO
     """,
     documentation = doc7(),
     references = { JavaCode7().sendMessageToClient(client, message, mailer) }
+
 )
 
 fun sendMessageToClient(
         client: Client?, message: String?, mailer: Mailer
 ) {
-    todoTask7(client, message, mailer)
+    if(client?.personalInfo?.email != null && message != null) {
+        mailer.sendMessage(client.personalInfo.email, message.orEmpty())
+    }
 }
 
 class Client (val personalInfo: PersonalInfo?)
